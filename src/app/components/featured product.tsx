@@ -2,7 +2,6 @@ import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineFavoriteBorder , MdZoomIn } from "react-icons/md";
 import Image from "next/image";
-import { ImMagicWand } from "react-icons/im";
 export default function Feature() {
   return (
     <div className="flex flex-col items-center space-y-16 p-4">
