@@ -361,30 +361,37 @@ export default function Feature() {
 <div className="flex flex-col items-center space-y-16 p-4">
   <h1 className="text-4xl mt-12 font-bold text-blue-900">Trending Products</h1>
 
-  {/* Products Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {[
-      "image 1171.png",
-      "image 1170.png",
-      "image 31.png",
-      "image.png",
-    ].map((image, index) => (
-      <div key={index} className="w-80 h-96 bg-white shadow-lg mx-auto">
-        <div className="flex justify-center items-center w-64 h-60 bg-gray-100 mx-auto mt-8">
-          <img className="p-4" src={image} alt="Product " />
-        </div>
-        <h1 className="text-xl text-blue-900 p-4 font-semibold text-center">
-          Cantilever chair
-        </h1>
-        <p className="text-center text-base font-semibold text-blue-900">
-          $26.00{" "}
-          <span className="text-slate-300 ml-3 text-sm line-through">
-            $42.00
-          </span>
-        </p>
+{/* Products Grid */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  {[
+    "image 1171.png",
+    "image 1170.png",
+    "image 31.png",
+    "image.png",
+  ].map((image, index) => (
+    <div key={index} className="w-80 h-96 bg-white shadow-lg mx-auto">
+      <div className="flex justify-center items-center w-64 h-60 bg-gray-100 mx-auto mt-8">
+        <Image
+          className="p-4"
+          src={`/${image}`} // Adjust the path if needed
+          alt={`Product ${index + 1}`}
+          width={256} // Provide width (w-64 in Tailwind = 16rem = 256px)
+          height={240} // Provide height (h-60 in Tailwind = 15rem = 240px)
+        />
       </div>
-    ))}
-  </div>
+      <h1 className="text-xl text-blue-900 p-4 font-semibold text-center">
+        Cantilever chair
+      </h1>
+      <p className="text-center text-base font-semibold text-blue-900">
+        $26.00{" "}
+        <span className="text-slate-300 ml-3 text-sm line-through">
+          $42.00
+        </span>
+      </p>
+    </div>
+  ))}
+</div>
+
 
   {/* Promotional Section */}
   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
