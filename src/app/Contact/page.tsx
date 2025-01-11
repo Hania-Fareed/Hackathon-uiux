@@ -1,13 +1,41 @@
-import Contacts from "../components/navbar";
-import Header from "../components/header";
+"use client";
+import React from "react";
 import Footer from "../components/footer";
 import Image from "next/image";
+import Swal from 'sweetalert2'
 
-export default function Contact() {
+
+const contact = () => {
+
+  const onSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    formData.append("access_key", "b2a921ef-606a-45d4-96a1-83dbb0e6e6a4");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    }).then((res) => res.json());
+
+    if (res.success) {
+      Swal.fire({
+        title: "Success!",
+        text: "Message sent successfully!",
+        icon: "success"
+      });
+    }
+  };
+
   return (
     <div>
-      <Contacts />
-      <Header />
 
       <header className="relative py-16 mt-14 bg-purple-50">
         <div className="container mx-auto px-4">
@@ -18,7 +46,7 @@ export default function Contact() {
         </div>
       </header>
 
-      <div className="flex space-x-16 ml-96 mt-24">
+      <div className="flex space-x-16 ml-80 mt-24">
         {/* Information About Us Section */}
         <section className="w-1/2">
           <h2 className="text-blue-900 font-bold text-4xl">Information About Us</h2>
@@ -80,53 +108,67 @@ export default function Contact() {
         </section>
       </div>
 
-      <section className="ml-96">
-        <h2 className="text-blue-900 font-bold text-4xl">Get In Touch</h2>
+      <section className="ml-80">
+        <h2 className="text-blue-900 font-bold mt-32 text-4xl">Get In Touch</h2>
         <p className="mt-4 text-blue-800">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis neque ultrices<br/>  tristique amet erat vitae eget dolor los vitae lobortis quis bibendum quam.
         </p>
       </section>
 
       {/* Contact Form in a Box */}
+      <div className="flex">
       <section className=" max-w-3xl ml-72 space-y-8 p-6">
+        <form onSubmit={onSubmit}>
         <div className="space-y-4">
           {/* Name and Email sections side by side */}
           <div className="flex space-x-4">
             {/* Your Name */}
             <div className="flex flex-col w-1/2">
               <label className="text-[#8A8FB9] text-[16px] font-lato">Your Name*</label>
-              <input type="text" className="border border-[#A4B6C8B3] rounded-[3px] p-2" />
+              <input type="text" className="border border-[#A4B6C8B3] rounded-[3px] p-2" name="name" placeholder="Enter your name" required />
             </div>
 
             {/* Your E-mail */}
             <div className="flex flex-col w-1/2">
               <label className="text-[#8A8FB9] text-[16px] font-lato">Your E-mail*</label>
-              <input type="email" className="border border-[#A4B6C8B3] rounded-[3px] p-2" />
+              <input type="email" className="border border-[#A4B6C8B3] rounded-[3px] p-2" name="email" placeholder="Your E-mail" required />
             </div>
           </div>
 
           {/* Subject */}
           <div className="flex flex-col">
             <label className="text-[#8A8FB9] text-[16px] font-lato">Subject*</label>
-            <input type="text" className="border border-[#A4B6C8B3] rounded-[3px] p-2" />
+            <input type="text" className="border border-[#A4B6C8B3] rounded-[3px] p-2" name="subject" placeholder="Subject" required />
           </div>
 
           {/* Type Your Message */}
           <div className="flex flex-col">
             <label className="text-[#8A8FB9] text-[16px] font-lato">Type Your Message*</label>
-            <textarea className="border border-[#A4B6C8B3] rounded-[3px] p-2" rows={5}></textarea>
+            <textarea name="message" className="border border-[#A4B6C8B3] rounded-[3px] p-2" placeholder="Type Your Message" required rows={5}></textarea>
           </div>
         </div>
 
         {/* Send Mail Button */}
-        <div className="flex justify-center">
-          <button className="relative left-[-300px] bg-[#FB2E86] text-white text-[16px] font-josefin-sans py-2 px-8 rounded-[3px] hover:bg-purple-600 transition-all duration-300">
+        <div className="flex justify-center ">
+          <button type="submit" className="relative -ml-80 mt-3 bg-[#FB2E86] text-white text-[16px] font-josefin-sans py-2 px-8 rounded-[3px] hover:bg-purple-600 transition-all duration-300">
             Send Mail
           </button>
         </div>
+        </form>
       </section>
+      <Image
+      className="max-w-3xl ml-72"
+      src="/group 124.png"
+      alt="Contact Form"
+      width={500}
+      height={400}
+      />
+      </div>
+      
 
       <Footer />
     </div>
   );
 }
+
+export default contact;

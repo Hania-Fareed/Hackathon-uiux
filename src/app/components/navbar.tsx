@@ -1,6 +1,8 @@
 import Link from "next/link";
-
-export default function Contacts() {
+import { MdFavoriteBorder } from "react-icons/md";
+import { LuShoppingCart } from "react-icons/lu";
+import { BiUser } from "react-icons/bi";
+export default function Navbar() {
   return (
     <div className="bg-purple-600 text-white px-4">
       <ul className="flex items-center justify-between px-96 h-10">
@@ -41,13 +43,25 @@ export default function Contacts() {
             className="hover:text-black transition-all duration-300"
             href="/Login"
           >
-            <li>Login</li>
+            <li>Login <BiUser className="ml-10 -mt-5"/></li>
           </Link>
           <Link
             className="hover:text-black transition-all duration-300"
             href="/"
           >
             <li>Wishlist</li>
+          </Link>
+          <Link
+            className="hover:text-black transition-all duration-300"
+            href="/"
+          >
+            <li><MdFavoriteBorder /></li>
+          </Link>
+          <Link
+            className="hover:text-black transition-all duration-300"
+            href="/Cart"
+          >
+            <li><LuShoppingCart /></li>
           </Link>
         </div>
       </ul>

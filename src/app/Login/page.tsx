@@ -1,13 +1,9 @@
-import Contacts from "../components/navbar"
-import Header from "../components/header"
 import Footer from "../components/footer"
 
 export default function MyAccount() {
     return (
       <div className="bg-gray-50 min-h-screen">
-        <Contacts />
-        <Header/>
-        <header className="relative py-6">
+        <header className="relative py-6 bg-[#E7E4F8] ">
           <div className="container mx-auto px-4">
             <h1 className="text-2xl font-bold text-blue-900">My Account</h1>
             <p className="text-sm text-gray-500">
