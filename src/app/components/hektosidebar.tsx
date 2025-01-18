@@ -1,34 +1,88 @@
-import React from "react";
-import Footer from "./footer";
 import Link from "next/link";
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import Image from "next/image";
 
 const HektoSidebar = () => {
+  const products = [
+    {
+      id: 1,
+      image: "/Rectangle 39.png",
+      name: "Ut diam consequat",
+      color: "Brown",
+      size: "XL",
+      price: "$32.00",
+    },
+    {
+      id: 2,
+      image: "/Rectangle 40.png",
+      name: "Ut diam consequat",
+      color: "Brown",
+      size: "XL",
+      price: "$32.00",
+    },
+    {
+      id: 3,
+      image: "/Rectangle 41.png",
+      name: "Ut diam consequat",
+      color: "Brown",
+      size: "XL",
+      price: "$32.00",
+    },
+    {
+      id: 4,
+      image: "/Rectangle 42.png",
+      name: "Ut diam consequat",
+      color: "Brown",
+      size: "XL",
+      price: "$32.00",
+    },
+    {
+      id: 5,
+      image: "/Rectangle 43.png",
+      name: "Ut diam consequat",
+      color: "Brown",
+      size: "XL",
+      price: "$32.00",
+    },
+  ];
+
   return (
-    <div className="mt-[50px] mb-[100px]">
+    <aside className="">
       <div className="grid lg:grid-cols-3 grid-cols-1">
-        {/* <div className="text-blue-900 mt-10">
-                <h2 className="font-bold text-xl md:text-2xl">Recent Posts</h2>
-                {[...Array(4)].map((_, index) => (
-                  <div className="flex items-start mt-8" key={index}>
-                    <Image
-                      src={`/Rectangle 12${6 + index}.png`}
-                      alt={`recent-post-${index}`}
-                      width={100}
-                      height={30}
-                      className="w-20 h-auto"
-                    />
-                    <div className="ml-3">
-                      <h2 className="text-sm font-medium">It is a long established fact</h2>
-                      <p className="text-xs text-slate-400">Aug 09 2020</p>
-                    </div>
-                  </div>
-                ))}
-              </div> */}
+      <div className="container mx-auto mt-28 space-y-6">
+      {products.map((product) => (
+        <div
+          key={product.id}
+          className="flex items-center justify-between border-b border-gray-300 pb-4"
+        >
+          {/* Product Image */}
+          <div className="flex items-center space-x-4">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={100}
+              height={100}
+              className="rounded-md"
+            />
+            <div>
+              <h2 className="text-lg font-semibold">{product.name}</h2>
+              <p className="text-sm text-gray-500">
+                Color: <span className="text-blue-500">{product.color}</span>
+              </p>
+              <p className="text-sm text-gray-500">
+                Size: <span className="text-blue-500">{product.size}</span>
+              </p>
+            </div>
+          </div>
+          {/* Product Price */}
+          <div className="text-lg font-bold text-blue-900 ml-32">{product.price}</div>
+        </div>
+      ))}
+    </div>
         {/* items */}
         <div className="col-span-2"></div>
         {/* summary */}
-        <div className="bg-[#E8E6F1] p-5 rounded-lg w-96 ml-28">
+        <div className="bg-[#E8E6F1] p-5 rounded-lg w-96 mt-10">
           <div className="text-lg text-blue-900 font-semibold tracking-tight uppercase">
             <div className="flex items-center justify-between capitalize">
               <h2>Subtotals:</h2>
@@ -49,14 +103,13 @@ const HektoSidebar = () => {
           <IoMdCheckmarkCircle className="text-green-600 -mt-4 ml-5"/>
           {/* Button */}
           <Link href={"/"}>
-          <div className="flex mt-8 items-center justify-center w-full bg-green-500 h-10 hover:bg-green-600 transition duration-300">
+          <div className="flex mt-5 items-center justify-center w-full bg-green-500 h-10 hover:bg-green-600 transition duration-300">
             <button className="text-medium text-white">Proceed To Checkout</button>
           </div>
           </Link>
         </div>
       </div>
-      <Footer />
-    </div>
+    </aside>
   );
 };
 

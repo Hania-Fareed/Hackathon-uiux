@@ -1,26 +1,65 @@
-export const product = {
-    name: 'product', // Use a valid identifier without spaces
+export const productSchema ={
+    name: 'product',
     type: 'document',
-    title: 'Products', // Titles can contain spaces, as they're displayed in the Studio
+    title: 'Product',
     fields: [
       {
         name: 'name',
         type: 'string',
-        title: 'Product Name', // Titles for fields can also contain spaces
-      },
-      {
-        name: 'price',
-        type: 'number',
-        title: 'Product Price', // Titles for fields can also contain spaces
+        title: 'Name',
+        validation: (Rule: any) => Rule.required().error('Name is required'),
       },
       {
         name: 'image',
-        type: 'image', // ✅ Correct type for images
-        title: 'Product Image', // Titles for fields can also contain spaces
+        type: 'image',
+        title: 'Image',
         options: {
-          hotspot: true, // ✅ Enables image cropping and focal points in Sanity Studio
+          hotspot: true,
         },
+        description: 'Upload an image of the product.',
+      },
+      {
+        name: 'price',
+        type: 'string',
+        title: 'Price',
+        validation: (Rule: any) => Rule.required().error('Price is required'),
+      },
+      {
+        name: 'description',
+        type: 'text',
+        title: 'Description',
+        validation: (Rule: any) =>
+          Rule.max(150).warning('Keep the description under 150 characters.'),
+      },
+      {
+        name: 'discountPercentage',
+        type: 'number',
+        title: 'Discount Percentage',
+        validation: (Rule: any) =>
+          Rule.min(0).max(100).warning('Discount must be between 0 and 100.'),
+      },
+      {
+        name: 'isFeaturedProduct',
+        type: 'boolean',
+        title: 'Is Featured Product',
+      },
+      {
+        name: 'stockLevel',
+        type: 'number',
+        title: 'Stock Level',
+        validation: (Rule: any) => Rule.min(0).error('Stock level must be a positive number.'),
+      },
+      {
+        name: 'category',
+        type: 'string',
+        title: 'Category',
+        options: {
+          list: [
+            { title: 'Chair', value: 'Chair' },
+            { title: 'Sofa', value: 'Sofa' },
+          ],
+        },
+        validation: (Rule: any) => Rule.required().error('Category is required'),
       },
     ],
   };
-  

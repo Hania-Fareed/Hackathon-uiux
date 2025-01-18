@@ -83,7 +83,7 @@ export default function Header() {
                   FAQ
                 </button>
                 <button
-                  onClick={() => handleMenuItemClick("/home-about")}
+                  onClick={() => handleMenuItemClick("/")}
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   About Home

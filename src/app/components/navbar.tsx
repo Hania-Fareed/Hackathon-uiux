@@ -13,7 +13,7 @@ export default function Navbar() {
             href="/"
           >
             <span>📧</span> {/* Email Icon */}
-            <li>mhhasanul@gmail.com</li>
+            <li>haniafareed7@gmail.com</li>
           </Link>
 
           <Link
@@ -21,7 +21,7 @@ export default function Navbar() {
             href="/"
           >
             <span>📞</span> {/* Phone Icon */}
-            <li>(12345)67890</li>
+            <li>(0333)3538055</li>
           </Link>
         </div>
 
