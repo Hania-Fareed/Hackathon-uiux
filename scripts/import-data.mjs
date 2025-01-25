@@ -53,6 +53,7 @@ async function importData() {
         name: item.name,
         category: item.category || null,
         price: item.price,
+        oldPrice: item.oldPrice,
         description: item.description || '',
         discountPercentage: item.discountPercentage || 0,
         stockLevel: item.stockLevel || 0,

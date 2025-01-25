@@ -1,8 +1,23 @@
-import Link from "next/link";
+"use client"
+// import React, { useEffect, useState } from 'react'
+import Image from "next/image";
 import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineFavoriteBorder , MdZoomIn } from "react-icons/md";
-import Image from "next/image";
-export default function Feature() {
+import Link from 'next/link';
+// import { Product } from '../../../types/product';
+// import { client } from '@/sanity/lib/client';
+// import { allProduct } from '@/sanity/lib/queries';
+const Featured = () => {
+
+  // const [product, setProduct] = useState<Product[]>([])
+
+  // useEffect(() => {
+  //     async function fetchproduct() {
+  //         const fetchedProduct : Product[] = await client.fetch(allProduct) 
+  //         setProduct(fetchedProduct)
+  //     }
+  //     fetchproduct()
+  // },[])
   return (
     <div className="flex flex-col items-center space-y-16 p-4">
       {/* Heading */}
@@ -612,10 +627,8 @@ export default function Feature() {
     </button>
   </div>
 </div>
-
-
-
-
     </div>
   );
 }
+
+export default Featured

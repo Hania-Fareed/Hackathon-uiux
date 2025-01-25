@@ -97,7 +97,7 @@ export default function Header() {
               Pages
             </li>
           </Link>
-          <Link href="/Product">
+          <Link href="/product">
             <li className="hover:text-pink-600 transition-all duration-300">
               Products
             </li>

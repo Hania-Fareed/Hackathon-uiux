@@ -1,0 +1,75 @@
+{
+    "list":  [
+        {
+          "name": "Accumsan tinc_idunt",
+          "id": "1",
+          "imagePath": "/Rectangle 32.png",
+          "type": "product",
+          "stockLevel": 12,
+          "price": 26.0,
+          "oldPrice": 52.0,
+          "description":
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        },
+        {
+          "name": "In nulla",
+          "id" : "2",
+          "imagePath": "/Rectangle 33.png",
+          "stockLevel": 11,
+          "type": "product",
+          "price": 100,
+          "oldPrice": 52.0,
+          "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        },
+        {
+          "name": "Vel sem",
+          "id" : "3",
+          "imagePath": "/Rectangle 34.png",
+          "stockLevel": 13,
+          "type": "product",
+          "price": 100,
+          "oldPrice": 52.0,
+          "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        },
+        {
+          "name": "Porttitor cum",
+          "id" : "4",
+          "imagePath": "/Rectangle 35.png",
+          "type": "product",
+          "stockLevel": 12,
+          "price": 100,
+          "oldPrice": 52.0,
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        },
+        {
+          "name": "Nunc in",
+          "id" : "5",
+          "imagePath": "/Rectangle 36.png",
+          "type": "product",
+          "price": 100,
+          "stockLevel": 15,
+          "oldPrice": 52.0,
+          "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        },
+        {
+          "name": "Vitae facilisis",
+          "id" : "6",
+          "imagePath": "/Rectangle 37.png",
+          "price": 100,
+          "stockLevel": 14,
+          "type": "product",
+          "oldPrice": 52.0,
+          "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        },
+        {
+          "name": "Curabitur lectus",
+          "id" : "7",
+          "type": "product",
+          "imagePath": "/Rectangle 38.png",
+          "price": 100,
+          "stockLevel": 16,
+          "oldPrice": 52.0,
+          "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo."
+        }
+      ]
+}

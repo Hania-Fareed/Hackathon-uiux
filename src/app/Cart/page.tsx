@@ -1,145 +1,131 @@
-"use client";
-import React, { useEffect } from 'react'
-import styles from '../styles/cart.module.css'
+"use client"
+import React, { useEffect, useState } from 'react';
+import { Product } from '../../../types/product';
+import { getCartItems, removeFromCart, updateCartQuntity } from '../actions/actions';
+import Swal from 'sweetalert2';
 import Image from 'next/image';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, useAppSelector } from '@/redux/store';
-import { updateCart } from '@/redux/features/cart-slice';
+import { urlFor } from '@/sanity/lib/image';
+import Footer from '../components/footer';
+import Link from 'next/link';
 
+const Cartpage = () => {
+    const [cartItems, setCartItems] = useState<Product[]>([]);
 
-
-interface CartItem {
-    name: string;
-    id: number;
-    imagePath: string;
-    price: number;
-    description: string;
-    quantity: number;
-}
-
-const Page = () => {
-    const [cartItems, setCartItems] = React.useState<CartItem[]>([])
-
-    const dispatch = useDispatch<AppDispatch>();
-    const cartArray: CartItem[] = useAppSelector((state) => state.cartReducer);
-
-    // const tempcartitems: CartItem[] = [
-    //     {
-    //         name: 'Product 1',
-    //         id: 1,
-    //         imagePath: 'https://source.unsplash.com/random',
-    //         price: 100,
-    //         description: 'This is a description',
-    //         quantity: 1
-    //     },
-    //     {
-    //         name: 'Product 2',
-    //         id: 2,
-    //         imagePath: 'https://source.unsplash.com/random',
-    //         price: 200,
-    //         description: 'This is a description',
-    //         quantity: 1
-
-    //     },
-    //     {
-    //         name: 'Product 3',
-    //         id: 3,
-    //         imagePath: 'https://source.unsplash.com/random',
-    //         price: 300,
-    //         description: 'This is a description',
-    //         quantity: 1
-
-    //     },
-    //     {
-    //         name: 'Product 4',
-    //         id: 4,
-    //         imagePath: 'https://source.unsplash.com/random',
-    //         price: 400,
-    //         description: 'This is a description',
-    //         quantity: 1
-
-    //     }
-
-    // ]
     useEffect(() => {
-        setCartItems(cartArray)
-    }, [cartArray])
+        setCartItems(getCartItems());
+    }, []);
 
-    const incremntCartItem = (index: number) => {
+    const handleRemove = (id: string) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromCart(id);
+                setCartItems(getCartItems());
+                Swal.fire('Removed!', 'Your item has been removed.', 'success');
+            }
+        });
+    };
 
-        //  old data 
-        //  increment quantity of that item
-        // update cart state in redux
-        const tempCartItems = cartArray.map((item, i) =>
-            i === index ? { ...item, quantity: item.quantity + 1 } : item
-        )
-        dispatch(updateCart(tempCartItems));
+    const handleQuantityChange = (id: string, quantity: number) => {
+        updateCartQuntity(id, quantity);
+        setCartItems(getCartItems());
+    };
 
+    const handleIncrement = (id: string) => {
+        const product = cartItems.find((item) => item._id === id);
+        if (product) {
+            handleQuantityChange(id, product.stockLevel + 1)
+        }
+    };
 
-    }
-    const decrementCartItem = (index: number) => {
+    const handleDecrement = (id: string) => {
+        const product = cartItems.find((item) => item._id === id);
+        if (product && product.stockLevel > 1) {
+            handleQuantityChange(id, product.stockLevel - 1)
+        }
+    };
 
+    const calculatedTotal = () => {
+        return cartItems.reduce((total, item) => total + item.price * item.stockLevel, 0);
+    };
 
-        const tempCartItems = cartArray.map((item, i) =>
-            i === index && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-        )
-        dispatch(updateCart(tempCartItems));
-    }
-    const removeCartItem = (index: number) => {
-        const tempCartItems = [...cartArray];
-        tempCartItems.splice(index, 1);
-        dispatch(updateCart(tempCartItems));
-
-     }
+    const handleProceed = () => {
+        Swal.fire({
+            title: 'Proceed to checkout?',
+            text: 'Please review your order before proceeding!',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Success', 'Your order has been successfully processed', 'success');
+                setCartItems([]);
+            }
+        });
+    };
 
     return (
-        <div className={styles.cartPage}>
-            <h1 className={styles.cartHead}>Cart</h1>
-            {
-                cartItems.length === 0 ? <h1 className={styles.emptyCart}>Cart is empty</h1> : null
-            }
-
-            <div>
-                {
-                    cartItems.map((item, index) => (
-                        <div key={index} className={styles.cartCard}>
-                            <div className={styles.s1}>
-                                <Image src={item.imagePath} alt={item.name} width={200} height={200} />
-                                <h3>{item.name}</h3>
+        <div>
+        <div className="max-w-5xl mx-auto p-6 mt-5 bg-gray-100 min-h-screen">
+            <h1 className="text-3xl font-bold text-gray-800 mb-6">Shopping Cart</h1>
+            {cartItems.length === 0 ? (
+                <p className="text-lg text-gray-500">Your cart is empty.</p>
+            ) : (
+                <div className="bg-white p-4 shadow-md rounded-md">
+                    {cartItems.map((item) => (
+                        <div key={item._id} className="flex justify-between items-center border-b py-4">
+                            {item.image && (
+                                        <Image
+                                          src={urlFor(item.image).url()}
+                                          alt={item.name}
+                                          width={50}
+                                          height={50}
+                                          className="w-20 h-20 object-cover rounded" 
+                                        />
+                                      )}
+                            <div className="flex-1 ml-4">
+                                <h2 className="text-lg font-semibold">{item.name}</h2>
+                                <p className="text-gray-600">${item.price}</p>
                             </div>
-                            <div className={styles.s1}>
-                                <h2>{item.price * item.quantity}</h2>
-                                <div className={styles.incredecre}>
-                                    <button
-                                        onClick={() => {
-                                            decrementCartItem(index)
-                                        }}
-                                    >-</button>
-
-                                    <span>{item.quantity}</span>
-
-                                    <button
-                                        onClick={() => {
-                                            incremntCartItem(index)
-                                        }}
-                                    >+</button>
-                                </div>
-                                <svg
-                                    onClick={() => {
-                                        removeCartItem(index)
-                                    }}
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-                                </svg>
-
+                            <div className="flex items-center">
+                                <button onClick={() => handleDecrement(item._id)} className="px-3 py-1 bg-gray-300 rounded-l">-</button>
+                                <span className="px-4 py-2 bg-white border text-center">{item.stockLevel}</span>
+                                <button onClick={() => handleIncrement(item._id)} className="px-3 py-1 bg-gray-300 rounded-r">+</button>
                             </div>
-
+                            <button
+                                onClick={() => handleRemove(item._id)}
+                                className="ml-4 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                            >
+                                Remove
+                            </button>
                         </div>
-                    ))
-                }
-            </div>
+                    ))}
+                    <div className="flex justify-between items-center mt-6">
+                        <h2 className="text-xl font-semibold">Total: ${calculatedTotal().toFixed(2)}</h2>
+                        <Link href={"/Hekto"}>
+                        <button
+                            onClick={handleProceed}
+                            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
+                        >
+                            Proceed to Checkout
+                        </button>
+                        </Link>
+                    </div>
+                </div>
+            )}
         </div>
-    )
-}
+        <Footer />
+        </div>
+    );
+};
 
-export default Page
+export default Cartpage;
