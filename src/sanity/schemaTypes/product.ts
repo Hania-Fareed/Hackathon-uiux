@@ -1,3 +1,5 @@
+import { Rule } from 'sanity';
+
 export const productSchema = {
     name: 'product',
     type: 'document',
@@ -7,23 +9,20 @@ export const productSchema = {
         name: 'name',
         type: 'string',
         title: 'Name',
-        validation: (Rule: any) => Rule.required().error('Name is required'),
+        validation: (Rule: Rule) => Rule.required().error('Name is required'),
       },
       {
         name: 'slug',
         type: 'slug',
-        title: 'slug',
+        title: 'Slug',
         options: {
-          source : 'name'
-        }
+          source: 'name',
+        },
       },
       {
         name: 'image',
         type: 'image',
         title: 'Image',
-        asset: {
-          "_ref": "image-Tb9Ew8CXIwaY6R1kjMvI0uRR-2000x3000-jpg"
-        },
         options: {
           hotspot: true,
         },
@@ -33,7 +32,7 @@ export const productSchema = {
         name: 'price',
         type: 'string',
         title: 'Price',
-        validation: (Rule: any) => Rule.required().error('Price is required'),
+        validation: (Rule: Rule) => Rule.required().error('Price is required'),
       },
       {
         name: 'oldPrice',
@@ -44,14 +43,14 @@ export const productSchema = {
         name: 'description',
         type: 'text',
         title: 'Description',
-        validation: (Rule: any) =>
+        validation: (Rule: Rule) =>
           Rule.max(150).warning('Keep the description under 150 characters.'),
       },
       {
         name: 'discountPercentage',
         type: 'number',
         title: 'Discount Percentage',
-        validation: (Rule: any) =>
+        validation: (Rule: Rule) =>
           Rule.min(0).max(100).warning('Discount must be between 0 and 100.'),
       },
       {
@@ -63,7 +62,7 @@ export const productSchema = {
         name: 'stockLevel',
         type: 'number',
         title: 'Stock Level',
-        validation: (Rule: any) => Rule.min(0).error('Stock level must be a positive number.'),
+        validation: (Rule: Rule) => Rule.min(0).error('Stock level must be a positive number.'),
       },
       {
         name: 'category',
@@ -75,7 +74,7 @@ export const productSchema = {
             { title: 'Sofa', value: 'Sofa' },
           ],
         },
-        validation: (Rule: any) => Rule.required().error('Category is required'),
+        validation: (Rule: Rule) => Rule.required().error('Category is required'),
       },
     ],
-  };
+};
