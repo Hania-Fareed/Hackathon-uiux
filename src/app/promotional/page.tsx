@@ -2,10 +2,17 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../../../types/product";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { one } from "@/sanity/lib/queries";
+import { Product } from "../../../types/product";
+import Leatest from "../components/leatest";
+import Offer from "../components/offer";
+import Unique from "../components/unique";
+import Trending from "../components/trending";
+import Top from "../components/top";
+import Update from "../components/update";
+import Featured from "../components/featured product";
 
 const slides = [
   {
@@ -59,6 +66,7 @@ function HeroSection() {
   const current = slides[currentSlide];
 
   return (
+    <div>
     <div className="bg-purple-100">
       {product.map((product) => (
         <section
@@ -147,6 +155,14 @@ function HeroSection() {
           </button>
         </section>
       ))}
+    </div>
+    <Featured/>
+    <Leatest/>
+    <Offer/>
+    <Unique/>
+    <Trending/>
+    <Top/>
+    <Update/>
     </div>
   );
 }
