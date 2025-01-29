@@ -4,8 +4,8 @@ import { Product } from '../../../types/product'
 import { client } from '@/sanity/lib/client'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
-import { MdWindow } from "react-icons/md";
-import { TfiMenuAlt } from "react-icons/tfi";
+import { MdWindow } from "react-icons/md"
+import { TfiMenuAlt } from "react-icons/tfi"
 import { some } from '@/sanity/lib/queries'
 import Link from 'next/link'
 import Footer from '../components/footer'

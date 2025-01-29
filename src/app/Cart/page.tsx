@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 import Footer from '../components/footer';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Cartpage = () => {
     const [cartItems, setCartItems] = useState<Product[]>([]);
@@ -56,6 +57,8 @@ const Cartpage = () => {
         return cartItems.reduce((total, item) => total + item.price * item.stockLevel, 0);
     };
 
+    const router = useRouter();
+
     const handleProceed = () => {
         Swal.fire({
             title: 'Proceed to checkout?',
@@ -68,6 +71,7 @@ const Cartpage = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('Success', 'Your order has been successfully processed', 'success');
+                router.push('/checkout')
                 setCartItems([]);
             }
         });
@@ -87,8 +91,8 @@ const Cartpage = () => {
                                         <Image
                                           src={urlFor(item.image).url()}
                                           alt={item.name}
-                                          width={50}
-                                          height={50}
+                                          width={500}
+                                          height={500}
                                           className="w-20 h-20 object-cover rounded" 
                                         />
                                       )}
@@ -111,7 +115,7 @@ const Cartpage = () => {
                     ))}
                     <div className="flex justify-between items-center mt-6">
                         <h2 className="text-xl font-semibold">Total: ${calculatedTotal().toFixed(2)}</h2>
-                        <Link href={"/Hekto"}>
+                        <Link href={""}>
                         <button
                             onClick={handleProceed}
                             className="px-6 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
