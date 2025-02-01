@@ -16,12 +16,14 @@ const Shop = () => {
     const [product, setProduct] = useState<Product[]>([])
 
     useEffect(() => {
-        async function fetchproduct() {
-            const fetchedProduct : Product[] = await client.fetch(some)
-            setProduct(fetchedProduct)
-        }
-        fetchproduct()
-    },[])
+      async function fetchProduct() {
+          const fetchedProduct: Product[] = await client.fetch(some);
+          console.log("Fetched Products:", fetchedProduct); // Debugging
+          setProduct(fetchedProduct);
+      }
+      fetchProduct();
+  }, []);
+  
 
     const handleAddToCart = (e: React.MouseEvent, product: Product) => {
       e.preventDefault()
@@ -85,7 +87,7 @@ const Shop = () => {
              {product.map((product) => (
                 <div key={product._id} 
                 className='border rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300'>
-                    <Link href={`/product/${product.slug.current}`}>
+                    <Link href={`/product/${product.slug?.current || ''}`}>
                     {product.image && (
                     <Image
                       src={urlFor(product.image).url()}

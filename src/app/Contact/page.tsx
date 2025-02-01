@@ -150,7 +150,8 @@ const contact = () => {
 
         {/* Send Mail Button */}
         <div className="flex justify-center ">
-          <button type="submit" className="relative -ml-80 mt-3 bg-[#FB2E86] text-white text-[16px] font-josefin-sans py-2 px-8 rounded-[3px] hover:bg-purple-600 transition-all duration-300">
+          <button type="submit" className=" relative ml-80 text-white text-[16px] font-josefin-sans py-2 px-8 rounded-[3px] hover:shadoe-lg bg-gradient-to-r w-full from-purple-500 to-pink-500 font-semibold shadow-md hover:shadw-lg 
+                     hover:scale-110 transition-transform duration-300 ease-in-out mt-3">
             Send Mail
           </button>
         </div>

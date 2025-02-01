@@ -100,8 +100,10 @@ function HeroSection() {
               {current.description}
             </p>
             <Link
-              href="#"
-              className="inline-block bg-pink-500 text-white text-sm font-medium py-3 px-6 rounded-md mt-6 hover:bg-pink-600 transition-all duration-300 w-1/3 text-center"
+              href="/shop-grid"
+              className="inline-block text-sm py-3 px-6 rounded-lg mt-6 w-1/3 text-center
+              bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-md hover:shadw-lg 
+                     hover:scale-110 transition-transform duration-300 ease-in-out"
             >
               {current.buttonText}
             </Link>
@@ -130,8 +132,9 @@ function HeroSection() {
                 onClick={() => setCurrentSlide(index)}
                 className={`w-3 h-3 rounded-full ${
                   currentSlide === index
-                    ? "bg-pink-500"
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500"
                     : "bg-gray-300 hover:bg-gray-400"
+                    
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               ></button>

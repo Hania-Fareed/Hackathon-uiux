@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Update = () => {
   return (
@@ -23,9 +24,12 @@ const Update = () => {
       Our Newsletter
     </p>
     {/* Button */}
-    <button className="mt-10 w-52 h-14 bg-pink-500 text-white font-light rounded-sm hover:bg-pink-600">
+    <Link href={"/shop-list"}>
+    <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadw-lg 
+                     hover:scale-110 transition-transform duration-300 ease-in-out mt-3">
       Shop Now
     </button>
+    </Link>
   </div>
 </div>
     </div>

@@ -7,6 +7,9 @@ import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { CgChevronRight } from "react-icons/cg";
 import { Product } from "../../../types/product";
+import Swal from "sweetalert2";
+import { client } from "@/sanity/lib/client";
+import Footer from "../components/footer";
 
 
 export default function CheckoutPage() {
@@ -66,17 +69,71 @@ export default function CheckoutPage() {
     setFormErrors(errors);
     return Object.values(errors).every((error) => !error);
   };
+   
 
-  const handlePlaceOrder = () => {
-    if (validateForm()) {
-      localStorage.removeItem("appliedDiscount");
-    //   toast.success("Order placed successfully!");
-    } else {
-    //   toast.error("Please fill in all the fields.");
+  const handlePlaceOrder = async () => {
+
+       if (!validateForm()) {
+      Swal.fire({
+        title: "Error!",
+        text: "Please fill all required fields before placing the order.",
+        icon: "error",
+        timer: 1000
+      });
+      return; // Stop the function if validation fails
     }
+  
+    Swal.fire({
+      title: "Confirm Order",
+      text: "Are you sure you want to place this order?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, place order",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("appliedDiscount");
+        Swal.fire(
+          "Success!",
+          "Your order has been successfully placed",
+          "success"
+        );
+      }
+    });
+
+
+    const orderData ={
+      _type : 'order',
+      firstName : formValues.firstName,
+      lastName : formValues.lastName,
+      address : formValues.address,
+      city : formValues.city,
+      zipCode : formValues.zipCode,
+      phone : formValues.phone,
+      email : formValues.email,
+      cartItems : cartItems.map(item => ({
+        type : 'referance',
+        ref : item._id
+      })),
+      total : total,
+      discount : discount,
+      orderDate : new Date().toISOString
+    };
+    
+    try{
+      await client.create(orderData)
+      localStorage.removeItem("appliedDiscount")
+    }
+    catch(error){
+      console.log("error creating order", error);
+    }
+
   };
+   
 
   return (
+    <div>
     <div className={`min-h-screen bg-gray-50`}>
       {/* Breadcrumb */}
       <div className="mt-6">
@@ -252,6 +309,8 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+     </div> 
+      <Footer/>
     </div>
   );
 }

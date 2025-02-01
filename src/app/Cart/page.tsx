@@ -67,7 +67,7 @@ const Cartpage = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, proceed!'
+            confirmButtonText: 'Yes, proceed!',
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('Success', 'Your order has been successfully processed', 'success');

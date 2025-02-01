@@ -3,66 +3,47 @@ import Image from 'next/image'
 
 const Offer = () => {
   return (
-    <div>
-        <div className="flex flex-col items-center space-y-16 p-4">
-                  <h1 className="text-4xl font-bold text-blue-900">What Shopex Offer!</h1>
-                  <div className="grid grid-col-1 md:grid-col-2 lg:col-4">
-                    <div className="flex gap-14 mt-16">
-                    <div className="flex flex-col items-center text-center space-y-3 p-8 w-64 h-72 bg-white shadow-lg">
-                      {/* <img src="free-delivery 1.png"/> */}
-                      <Image
-                      src="/free-delivery 1.png"
-                      alt="free-delivery 1.png"
-                      width={60}
-                      height={100}
-                      />
-                      <h2 className="text-xl font-bold text-blue-800">24/7 Support</h2>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
-                      </p>
-                   </div>
-                   <div className="flex flex-col items-center text-center space-y-3 p-8 w-64 h-72 bg-white shadow-lg">
-                      {/* <img src="cashback 1.png"/> */}
-                      <Image
-                      src="/cashback 1.png"
-                      alt="cashback 1.png"
-                      width={60}
-                      height={100}
-                      />
-                      <h2 className="text-xl font-bold text-blue-800">24/7 Support</h2>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
-                      </p>
-                   </div>
-                   <div className="flex flex-col items-center text-center space-y-3 p-8 w-64 h-72 bg-white shadow-lg">
-                      {/* <img src="Group.png"/> */}
-                      <Image
-                      src="/Group.png"
-                      alt="Group.png"
-                      width={50}
-                      height={100}
-                      />
-                      <h2 className="text-xl font-bold text-blue-800">24/7 Support</h2>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
-                      </p>
-                   </div>
-                   <div className="flex flex-col items-center text-center space-y-3 p-8 w-64 h-72 bg-white shadow-lg">
-                      {/* <img src="Group 1.png"/> */}
-                      <Image
-                      src="/Group 1.png"
-                      alt="Group 1.png"
-                      width={50}
-                      height={100}
-                      />
-                      <h2 className="text-xl font-bold text-blue-800">24/7 Support</h2>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
-                      </p>
-                   </div>
-                   </div>
-                  </div>
-                </div>
+    <div className="flex flex-col items-center space-y-16 p-4 py-14">
+      <h1 className="text-4xl font-bold text-blue-900 text-center">What Shopex Offer!</h1>
+
+      {/* Corrected Grid Layout */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+        {/* Offer Box 1 */}
+        <div className="flex flex-col items-center text-center space-y-3 p-6 w-full max-w-xs bg-white shadow-md rounded-lg hover:shadow-xl transition duration-300">
+          <Image src="/free-delivery 1.png" alt="Free Delivery" width={60} height={100} />
+          <h2 className="text-xl font-bold text-blue-800">Free Delivery</h2>
+          <p className="text-gray-500 text-sm leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
+          </p>
+        </div>
+
+        {/* Offer Box 2 */}
+        <div className="flex flex-col items-center text-center space-y-3 p-6 w-full max-w-xs bg-white shadow-md rounded-lg hover:shadow-xl transition duration-300">
+          <Image src="/cashback 1.png" alt="Cashback" width={60} height={100} />
+          <h2 className="text-xl font-bold text-blue-800">Cashback</h2>
+          <p className="text-gray-500 text-sm leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
+          </p>
+        </div>
+
+        {/* Offer Box 3 */}
+        <div className="flex flex-col items-center text-center space-y-3 p-6 w-full max-w-xs bg-white shadow-md rounded-lg hover:shadow-xl transition duration-300">
+          <Image src="/Group.png" alt="Quality Product" width={50} height={100} />
+          <h2 className="text-xl font-bold text-blue-800">Quality Product</h2>
+          <p className="text-gray-500 text-sm leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
+          </p>
+        </div>
+
+        {/* Offer Box 4 */}
+        <div className="flex flex-col items-center text-center space-y-3 p-6 w-full max-w-xs bg-white shadow-md rounded-lg hover:shadow-xl transition duration-300">
+          <Image src="/Group 1.png" alt="24/7 Support" width={50} height={100} />
+          <h2 className="text-xl font-bold text-blue-800">24/7 Support</h2>
+          <p className="text-gray-500 text-sm leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }

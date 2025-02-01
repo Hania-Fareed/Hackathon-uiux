@@ -1,22 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { Product } from '../../../types/product'
+import { client } from '@/sanity/lib/client'
+import { sofa } from '@/sanity/lib/queries'
+import { urlFor } from '@/sanity/lib/image'
+import Link from 'next/link'
+import Swal from 'sweetalert2'
+import { addToCart } from '../actions/actions'
 
 const Unique = () => {
+
+  const [product, setProduct] = useState<Product[]>([])
+  
+    useEffect(() => {
+      async function fetchproduct() {
+        const fetchedProduct: Product[] = await client.fetch(sofa)
+        setProduct(fetchedProduct)
+      }
+      fetchproduct()
+    }, [])
+
+    const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+          e.preventDefault()
+          Swal.fire({
+            title: `${product.name}`,
+            text: "Thanks for Add to Cart!",
+            icon: "success",
+            timer: 1000
+          });
+          addToCart(product)
+          
+        }
+
   return (
     <div>
         <div className="bg-purple-50 p-8">
+        {product.map((product) => (
+          <div key={product._id}>
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
         
             <div className="relative">
               <div className="absolute bg-pink-200 rounded-full w-72 h-72 -z-10 top-10 left-10"></div>
               {/* <img src="Group 153.png" alt="Sofa" className="relative z-10 rounded-lg"/> */}
-              <Image
-                className="relative z-10 rounded-lg"
-                src="/Group 153.png"
-                alt="Sofa"
-                width={600}
-                height={300}
-              />
+              
+                
+                <Link href={`/product/${product.slug?.current || ''}`}>
+                  {product.image && (
+                    <Image
+                      src={urlFor(product.image).url()}
+                       alt={product.name}
+                       width={600}
+                       height={300}
+                       className='relative z-10 rounded-lg'
+                    />
+                   )}
+                   </Link>
+                </div>
+              
             </div>
             <div className="space-y-4 text-gray-700">
               <h1 className="text-3xl font-bold text-blue-900">
@@ -39,9 +79,13 @@ const Unique = () => {
         
               {/* Button and Price */}
               <div className="flex items-center space-x-4">
-                <button className="bg-pink-500 text-white px-6 py-2 rounded-lg shadow hover:bg-pink-600">
-                  Add To Cart
-                </button>
+              <button
+                     className='bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadw-lg 
+                     hover:scale-110 transition-transform duration-300 ease-in-out mt-3'
+                     onClick={(e) => handleAddToCart(e, product)}
+                     >
+                      Add To Cart
+                     </button>
                 <div>
                   <h2 className="font-bold text-blue-900">B&amp;B Italian Sofa</h2>
                   <p className="text-gray-500">$32.00</p>
@@ -49,6 +93,7 @@ const Unique = () => {
               </div>
             </div>
           </div>
+          ))}
         </div>
     </div>
   )
