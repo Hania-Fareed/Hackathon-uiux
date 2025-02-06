@@ -4,7 +4,7 @@ import { groq } from "next-sanity";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Footer from "@/app/components/footer";
-import AddToCartButton from "@/app/components/AddToCartButton"; // Import the Client Component
+import AddToCartButton from "@/app/components/AddToCartButton";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -24,35 +24,43 @@ async function getProduct(slug: string): Promise<Product> {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const {slug} = await params;
+  const { slug } = await params;
   const product = await getProduct(slug);
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 py-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="bg-slate-50 rounded-full mt-10 px-14">
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          
+          {/* Product Image */}
+          <div className="bg-gray-100 rounded-lg p-6 flex justify-center">
             {product.image && (
               <Image
                 src={urlFor(product.image).url()}
                 alt={product.name}
                 width={500}
                 height={500}
+                className="rounded-lg shadow-md w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl"
               />
             )}
           </div>
-          <div>
-            <h1 className="text-2xl font-bold py-20">{product.name}</h1>
-            <p className="text-lg -mt-10">{product.description}</p>
-            <p className="text-lg font-semibold text-pink-500 italic py-1">
-              Rs. {product.price}
-            </p>
+
+          {/* Product Details */}
+          <div className="space-y-6 text-center md:text-left">
+            <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+            <p className="text-lg text-gray-600">{product.description}</p>
+            <p className="text-2xl font-semibold text-pink-500">Rs. {product.price}</p>
+
+            {/* Add to Cart Button */}
+            <div className="flex justify-center md:justify-start">
+              <AddToCartButton product={product} />
+            </div>
           </div>
-        </div>
-        <div className="ml-56">
-          <AddToCartButton product={product} /> {/* ✅ Use the Client Component here */}
+
         </div>
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );
